@@ -1,7 +1,7 @@
 #!/bin/bash
 source ~/.bash_profile
 
-#Created by tang.jiahao 2016/1/26
+#Created by tang 2016/1/26
 
 #connectstring=sys/oracle as sydba
 username=''
@@ -53,7 +53,7 @@ parse_options()
                         ;;
                 -f) filename=$2
                         shift 1
-                        ARGN=$(ARGN-1())
+                        ARGN=$((ARGN-1))
                         ;;
                 ?*) echo "ERROR: Unkwown option."
                         usage
@@ -85,15 +85,15 @@ EOF
 if ([ "$0" = "$BASH_SOURCE" ] || ! [ -n "$BASH_SOURCE" ]);
 then
         parse_options "$@"
-        if [ $filename=''|| $username=''|| $password='' ];then
+        if [[ $filename = "" ]||[[ $username = "" ]]||[[ $password = "" ]];then
                 usage
                 exit 0
         fi
-        if [ -f $filename ];then
+        if [ ! -f $filename ];then
                 echo "$filename does not exist"
                 exit 0
         fi
-        if [ -z $ReturnValue_TF ];then
+        if [ ! -z $ReturnValue_TF ];then
                 return_Nothing
         else
                 return_Value
